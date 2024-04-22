@@ -34,8 +34,6 @@
     "nodemon": "^3.1.0",
     "otp-generator": "^4.0.1",
     "razorpay": "^2.9.3",
-    "redis": "^4.6.13",
-    "serpapi": "^2.1.0",
     "sharp": "^0.33.3",
     "yup": "^1.4.0",
     "yup-password": "^0.4.0"

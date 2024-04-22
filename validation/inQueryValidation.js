@@ -1,12 +1,7 @@
 import * as yup from "yup";
 
 export const inQuerySchema = yup.object({
-  firstName: yup
-    .string()
-    .required("Please enter your name")
-    .min(3, "Please enter minium 3 character")
-    .max(10, "You touch character limit"),
-  lastName: yup
+  name: yup
     .string()
     .required("Please enter your name")
     .min(3, "Please enter minium 3 character")

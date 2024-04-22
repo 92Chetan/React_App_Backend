@@ -11,7 +11,7 @@ import { authVerify } from "./middleware/Authmid.js";
 import userRoute from "./route/user.route.js";
 import connectDB from "./db/connectDB.js";
 import inQueryRoute from "./route/inQuery.route.js";
-import reviewRoute from "./route/review.js";
+// import reviewRoute from "./route/review.js";
 const app = express();
 
 app.use(
@@ -37,7 +37,7 @@ app.use("/auth", authRoute);
 app.use("/payment", paymentRoute);
 app.use("/user", authVerify, userRoute);
 app.use("/in_query", inQueryRoute);
-app.use("/review", reviewRoute);
+// app.use("/review", reviewRoute);
 
 app.use(morgan("dev"));
 

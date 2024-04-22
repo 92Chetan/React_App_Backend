@@ -7,7 +7,6 @@ import moment from "moment";
 
 import User from "../model/user.model.js";
 import Subscription from "../model/payment.modal.js";
-import client from "../db/connectRedis.js";
 
 export const payment = async (req, res) => {
   try {
@@ -126,27 +125,16 @@ export const SubscriptionUpdate = async (req, res) => {
 export const getPayment = async (req, res) => {
   try {
     const id = req.user;
-
-    let results;
-    let isCached = false;
-
     if (!mongoose.Types.ObjectId.isValid(id))
       return res.status(404).send(`No post with id: ${id}`);
 
-    const cache = await client.get(`SubscribeData-${id}`);
-    if (cache) {
-      isCached = true;
-      results = JSON.parse(cache);
-    } else {
-      results = await Subscription.find({ user: id }).populate([
-        { path: "user", select: "email fullName" },
-      ]);
-      if (!results) {
-        return res.status(400).json({ message: "Invalid request" });
-      }
-      await client.set(`SubscribeData-${id}`, JSON.stringify(results));
+    const paymentHistory = await Subscription.find({ user: id }).populate([
+      { path: "user", select: "email fullName" },
+    ]);
+    if (!paymentHistory) {
+      return res.status(400).json({ message: "Invalid request" });
     }
-    res.status(200).json(results);
+    res.status(200).json(paymentHistory);
   } catch (error) {
     console.log("Error: " + error);
     res.status(500).json({ message: "Internal server error" });

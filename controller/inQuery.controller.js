@@ -2,10 +2,9 @@ import InQuery from "../model/inQuery.modal.js";
 
 export const postInQuery = async (req, res) => {
   try {
-    const { firstName, lastName, email, message } = req.body;
+    const { name, email, message } = req.body;
     await InQuery.create({
-      firstName,
-      lastName,
+      name,
       email,
       message,
     });
